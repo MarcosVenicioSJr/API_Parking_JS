@@ -1,12 +1,23 @@
 const express = require('express');
+
 const app = express();
-app.listen(3000);
-app.use(express.json());
 
+app.listen(3000)
 
-let car = []
-let motorcycle = []
+//middleware
+app.use(express.json())
 
-app.get('/addVehicle/car', (req, res) => {
+let car = [];
+let motorcycle = [];
+
+app.get('/getCar', (req, res) => {    
+   res.send(car)
+})
+
+app.post('/addCar', (req, res) => {
+
+    const infoCar = req.body
+    car.push(infoCar);
+    res.send("OK")
 
 })
