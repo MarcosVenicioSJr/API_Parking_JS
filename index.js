@@ -11,13 +11,24 @@ let car = [];
 let motorcycle = [];
 
 app.get('/getCar', (req, res) => {    
-   res.send(car)
+   res.send(car);
+})
+
+app.get('/getMotorcycle', (req, res) => {
+    res.send(motorcycle);
 })
 
 app.post('/addCar', (req, res) => {
     const infoCar = req.body
     car.push(infoCar);
     res.send(`${JSON.stringify(infoCar)} foi adcionado com sucesso!`)
+})
+
+app.post('/addMotorcycle', (req, res) => {
+
+    const infoMoto = req.body;
+
+    
 
 })
 
