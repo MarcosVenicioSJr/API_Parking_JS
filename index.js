@@ -15,10 +15,9 @@ app.get('/getCar', (req, res) => {
 })
 
 app.post('/addCar', (req, res) => {
-
     const infoCar = req.body
     car.push(infoCar);
-    res.send("OK")
+    res.send(`${JSON.stringify(infoCar)} foi adcionado com sucesso!`)
 
 })
 
@@ -28,7 +27,8 @@ app.delete('/removeCar/board', (req, res) => {
     for(let i = 0; i < car.length; i++){
         if(board === car[i].board || board === car[i].board){
             car.splice(i, 1);
+            res.send(`O veículo de placa ${JSON.stringify(board)} foi removido com sucesso.`)
         }
     }
-    res.send(`O veículo de placa ${board} foi removido com sucesso.`)
+    res.send(`Veículo de placa ${JSON.stringify(board)} não encontrado!`)
 })
