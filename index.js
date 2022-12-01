@@ -32,25 +32,21 @@
             name: req.body.name,
             board: req.body.board
         }
-        let condition;
-        const phrase = "Moto já cadastrada"
 
         if (motorcycle.length === 0) {
             motorcycle.unshift(infoMoto)
             return res.send(`${JSON.stringify(infoMoto)} foi adcionado com sucesso!`)
         } else {
+
             let verification = motorcycle.find(value => value.board === infoMoto.board)
+
             verification === undefined ? (
                 res.send(`${JSON.stringify(infoMoto)} moto cadastrada com sucesso.`),
                 motorcycle.unshift(infoMoto)
             ) : (
-                res.send("Já existe uma moto com essa placa estacionada.")
+                res.send(`Já existe uma moto com essa placa estacionada.`)
             )
         }
-
-
-
-
     })
 
     app.delete('/removeCar/board', (req, res) => {
@@ -63,6 +59,10 @@
             }
         }
         res.send(`Veículo de placa ${JSON.stringify(board)} não encontrado!`)
+    })
+
+    app.delete('/removeMoto/board', (req, res) => {
+        const board = req.body.board
     })
 
 })()
