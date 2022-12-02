@@ -21,9 +21,25 @@
     })
 
     app.post('/addCar', (req, res) => {
-        const infoCar = req.body
-        car.push(infoCar);
-        res.send(`${JSON.stringify(infoCar)} foi adcionado com sucesso!`)
+        const infoCar = {
+            name: req.body.name,
+            board: req.body.board
+        }
+
+        if (motorcycle.length === 0) {
+            motorcycle.unshift(infoCar)
+            return res.send(`${JSON.stringify(infoCar)} foi adcionado com sucesso!`)
+        } else {
+
+            let verification = motorcycle.find(value => value.board === infoCar.board)
+
+            verification === undefined ? (
+                res.send(`${JSON.stringify(infoCar)} moto cadastrada com sucesso.`),
+                car.unshift(infoCar)
+            ) : (
+                res.send(`Já existe um carro com essa placa estacionada.`)
+            )
+        }
     })
 
     app.post('/addMotorcycle', (req, res) => {
@@ -64,13 +80,13 @@
     app.delete('/removeMoto/board', (req, res) => {
         const board = req.body.board
 
-        for (let i = 0; i < car.length; i++) {
-            if (board === car[i].board) {
-                car.splice(i, 1);
-                return res.send(`O carro de placa ${JSON.stringify(board)} foi removido com sucesso.`)
+        for (let i = 0; i < motorcycle.length; i++) {
+            if (board === motorcycle[i].board) {
+                motorcycle.splice(i, 1);
+                return res.send(`A moto de placa ${JSON.stringify(board)} foi removido com sucesso.`)
             }
         }
-        res.send(`O carro de placa ${JSON.stringify(board)} não foi encontrado!`)
+        res.send(`A moto de placa ${JSON.stringify(board)} não foi encontrado!`)
 
     })
 
