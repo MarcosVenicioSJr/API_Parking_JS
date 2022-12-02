@@ -53,16 +53,25 @@
         const board = req.body.board
 
         for (let i = 0; i < car.length; i++) {
-            if (board === car[i].board || board === car[i].board) {
+            if (board === car[i].board) {
                 car.splice(i, 1);
-                res.send(`O veículo de placa ${JSON.stringify(board)} foi removido com sucesso.`)
+                return res.send(`O carro de placa ${JSON.stringify(board)} foi removido com sucesso.`)
             }
         }
-        res.send(`Veículo de placa ${JSON.stringify(board)} não encontrado!`)
+        res.send(`O carro de placa ${JSON.stringify(board)} não foi encontrado!`)
     })
 
     app.delete('/removeMoto/board', (req, res) => {
         const board = req.body.board
+
+        for (let i = 0; i < car.length; i++) {
+            if (board === car[i].board) {
+                car.splice(i, 1);
+                return res.send(`O carro de placa ${JSON.stringify(board)} foi removido com sucesso.`)
+            }
+        }
+        res.send(`O carro de placa ${JSON.stringify(board)} não foi encontrado!`)
+
     })
 
 })()
